@@ -3,12 +3,26 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures
 {
-    public class LinkedList
+
+    public class Node
+    {
+        public int value;
+        public Node next, prev;
+
+        public Node(int _value)
+        {
+            value = _value;
+            next = null;
+            prev = null;
+        }
+    }
+
+    public class LinkedList2
     {
         public Node head;
         public Node tail;
 
-        public LinkedList()
+        public LinkedList2()
         {
             head = null;
             tail = null;
@@ -19,12 +33,14 @@ namespace AlgorithmsDataStructures
             if (head == null)
             {
                 head = _item;
+                head.next = null;
+                head.prev = null;
             }
             else
             {
                 tail.next = _item;
+                _item.prev = tail;
             }
-
             tail = _item;
         }
 
@@ -66,41 +82,38 @@ namespace AlgorithmsDataStructures
 
         public bool Remove(int _value)
         {
-            if (head == null)
-            {
-                return false;
-            }
-
-            if (head.value == _value)
-            {
-                head = head.next;
-
-                if (head == null)
-                {
-                    tail = null;
-                }
-
-                return true;
-            }
-
             Node node = head;
-            while (node.next != null)
-            {
-                if (node.next.value == _value)
-                {
-                    node.next = node.next.next;
 
-                    if (node.next == null)
+            while (node != null)
+            {
+                if (node.value == _value)
+                {
+                    if (node.prev != null)
                     {
-                        tail = node;
+                        node.prev.next = node.next;
                     }
+                    else
+                    {
+                        head = node.next;
+                    }
+
+                    if (node.next != null)
+                    {
+                        node.next.prev = node.prev;
+                    }
+                    else
+                    {
+                        tail = node.prev;
+                    }
+
+                    node.prev = null;
+                    node.next = null;
 
                     return true;
                 }
 
                 node = node.next;
             }
-
             return false;
         }
 
@@ -116,6 +129,7 @@ namespace AlgorithmsDataStructures
             {
                 Node next = node.next;
                 node.next = null;
+                node.prev = null;
                 node = next;
             }
 
@@ -139,14 +153,31 @@ namespace AlgorithmsDataStructures
 
         public void InsertAfter(Node _nodeAfter, Node _nodeToInsert)
         {
-            if (_nodeAfter == null || _nodeAfter == tail)
+            if (_nodeAfter == tail)
             {
                 AddInTail(_nodeToInsert);
                 return;
             }
 
+            if (_nodeAfter == null)
+            {
+                _nodeToInsert.next = head;
+                head.prev = _nodeToInsert;
+
+                head = _nodeToInsert;
+                return;
+            }
+
             _nodeToInsert.next = _nodeAfter.next;
+            _nodeToInsert.prev = _nodeAfter;
+            if (_nodeAfter.next != null)
+            {
+                _nodeAfter.next.prev = _nodeToInsert;
+            }
+
+
             _nodeAfter.next = _nodeToInsert;
+
         }
 
     }
