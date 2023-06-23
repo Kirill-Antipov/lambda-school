@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADS\DynArray.cs" />
     <Compile Include="ADS\LinkedList.cs" />
     <Compile Include="ADS\LinkedList2.cs" />
     <Compile Include="ADS\LinkedListExtensions.cs" />
