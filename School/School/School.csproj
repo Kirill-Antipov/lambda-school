@@ -47,6 +47,9 @@
     <Compile Include="ADS\LinkedList.cs" />
     <Compile Include="ADS\LinkedList2.cs" />
     <Compile Include="ADS\LinkedListExtensions.cs" />
+    <Compile Include="ADS\Stack.cs" />
+    <Compile Include="ADS\StackTasks.cs" />
+    <Compile Include="ADS\StackVariation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
