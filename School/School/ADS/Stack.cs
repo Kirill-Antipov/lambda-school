@@ -22,7 +22,7 @@ namespace AlgorithmsDataStructures
         {
             if (Size() == 0)
             {
-                throw new InvalidOperationException("Stack is empty");
+                return default(T);
             }
 
             var popIndex = data.Count - 1;
@@ -42,11 +42,10 @@ namespace AlgorithmsDataStructures
         {
             if (Size() == 0)
             {
-                throw new InvalidOperationException("Stack is empty");
+                return default(T);
             }
 
             return data[data.Count - 1];
         }
     }
-
 }

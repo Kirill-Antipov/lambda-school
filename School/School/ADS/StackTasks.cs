@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using AlgorithmsDataStructures;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace School.ADS
 {
@@ -6,7 +9,7 @@ namespace School.ADS
     {
         public static bool IsBracesSequenceBalanced(string input)
         {
-            var stack = new Stack<char>();
+            var stack = new AlgorithmsDataStructures.Stack<char>();
 
             foreach (char c in input)
             {
@@ -16,13 +19,47 @@ namespace School.ADS
                     continue;
                 }
 
-                if (stack.Count == 0 || stack.Pop() != '(')
+                if (stack.Size() == 0 || stack.Pop() != '(')
                 {
                     return false;
                 }
             }
 
-            return stack.Count == 0;
+            return stack.Size() == 0;
+        }
+
+        public static int ProcessPostfixExpression(AlgorithmsDataStructures.Stack<char> expression)
+        {
+            var operations = new Dictionary<char, Func<int, int, int>>()
+            {
+                {'+', (a, b) => {return a + b; } },
+                {'*', (a, b) => {return a * b; } },
+            };
+
+            var operands = new AlgorithmsDataStructures.Stack<int>();
+
+            while (expression.Size() > 0)
+            {
+                var symbol = expression.Pop();
+
+                if (operations.ContainsKey(symbol))
+                {
+                    var operand2 = operands.Pop();
+                    var operand1 = operands.Pop();
+                    var result = operations[symbol](operand1, operand2);
+                    operands.Push(result);
+                    continue;
+                }
+
+                if (symbol == '=')
+                {
+                    return operands.Pop();
+                }
+
+                operands.Push(int.Parse(symbol.ToString()));
+            }
+
+            throw new Exception("Incorrectly formed expression");
         }
     }
 }
