@@ -1,4 +1,5 @@
 ﻿using AlgorithmsDataStructures;
+using Done.AlgorithmsDataStructures;
 using System;
 
 namespace School.ADS

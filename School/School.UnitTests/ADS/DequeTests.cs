@@ -25,6 +25,8 @@ namespace School.UnitTests.ADS
             var tail = sut.RemoveTail();
 
             Assert.Equal(3, tail);
+
+            Assert.True(sut.Size() == 2);
         }
 
         [Fact]
