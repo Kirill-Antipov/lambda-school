@@ -47,26 +47,32 @@ namespace AlgorithmsDataStructures
                 return;
             }
 
-            if (Compare(value, head.value) < 0)
+            if (Compare(value, head.value) <= 0)
             {
                 newNode.next = head;
+                head.prev = newNode;
                 head = newNode;
                 return;
             }
 
-            var node = head;
-            while (node.next != null && Compare(value, node.next.value) >= 0)
+            if (Compare(value, tail.value) >= 0)
+            {
+                newNode.prev = tail;
+                tail.next = newNode;
+                tail = newNode;
+                return;
+            }
+
+            var node = head.next;
+            while (node != null && Compare(value, node.value) > 0)
             {
                 node = node.next;
             }
 
-            newNode.next = node.next;
-            node.next = newNode;
-
-            if (newNode.next == null)
-            {
-                tail = newNode;
-            }
+            newNode.prev = node.prev;
+            newNode.next = node;
+            node.prev.next = newNode;
+            node.prev = newNode;
         }
 
         public Node<T> Find(T val)
@@ -104,29 +110,41 @@ namespace AlgorithmsDataStructures
                 return;
             }
 
-            if (Compare(val, head.value) == 0)
+            if (Compare(val, head.value) == 0 && head.next == null)
             {
-                head = head.next;
+                head = tail = null;
                 return;
             }
 
-            var node = head;
-            while (node.next != null && Compare(val, node.next.value) != 0)
+            if (Compare(val, head.value) == 0)
+            {
+                head = head.next;
+                head.prev = null;
+
+                return;
+            }
+
+            if (Compare(val, tail.value) == 0)
+            {
+                tail = tail.prev;
+                tail.next = null;
+
+                return;
+            }
+
+            var node = head.next;
+            while (node != null && Compare(val, node.value) != 0)
             {
                 node = node.next;
             }
 
-            if (node.next != null)
+            if (node == null)
             {
-                node.next = node.next.next;
-
-                if (node.next == null)
-                {
-                    tail = node;
-                }
-
                 return;
             }
+
+            node.prev.next = node.next;
+            node.next.prev = node.prev;
         }
 
         public void Clear(bool asc)

@@ -42,10 +42,12 @@ namespace School.UnitTests.ADS
             }
         }
 
-        [Fact]
-        public void OrderedList_Delete_Removes_Node()
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void OrderedList_Delete_Removes_Node(bool order)
         {
-            var sut = new OrderedList<int>(true);
+            var sut = new OrderedList<int>(order);
 
             sut.Add(5);
             sut.Add(2);
@@ -58,6 +60,20 @@ namespace School.UnitTests.ADS
 
             Assert.True(sut.Count() == 4);
             Assert.Null(result);
+        }
+
+        [Fact]
+        public void OrderedList_Delete_Cleans_SingleElement()
+        {
+            var sut = new OrderedList<int>(true);
+
+            sut.Add(5);
+
+            sut.Delete(5);
+
+            Assert.True(sut.Count() == 0);
+            Assert.True(sut.head == null);
+            Assert.True(sut.tail == null);
         }
 
         [Fact]
