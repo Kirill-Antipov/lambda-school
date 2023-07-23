@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ADS\Deque.cs" />
     <Compile Include="ADS\DynArray.cs" />
+    <Compile Include="ADS\HashTable.cs" />
     <Compile Include="ADS\LinkedList.cs" />
     <Compile Include="ADS\LinkedList2.cs" />
     <Compile Include="ADS\LinkedListExtensions.cs" />
