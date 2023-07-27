@@ -49,6 +49,7 @@
     <Compile Include="ADS\LinkedList.cs" />
     <Compile Include="ADS\LinkedList2.cs" />
     <Compile Include="ADS\LinkedListExtensions.cs" />
+    <Compile Include="ADS\NativeDictionary.cs" />
     <Compile Include="ADS\OrderedList.cs" />
     <Compile Include="ADS\Queue.cs" />
     <Compile Include="ADS\Stack.cs" />
