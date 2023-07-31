@@ -62,7 +62,7 @@ namespace AlgorithmsDataStructures
                 index = StepNext(hash, i);
             }
 
-            if (slots[index] != null)
+            if (slots[index] != null && slots[index] == key)
             {
                 return values[index];
             }
