@@ -32,7 +32,27 @@ namespace AlgorithmsDataStructures
 
         public bool IsKey(string key)
         {
-            return Get(key) != null;
+            int hash = HashFun(key);
+            int i = 0;
+            int index = hash;
+
+            while (slots[index] != null && slots[index] != key)
+            {
+                i++;
+                if (i == size)
+                {
+                    return false;
+                }
+
+                index = StepNext(hash, i);
+            }
+
+            if (slots[index] != null && slots[index] == key)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public void Put(string key, T value)
