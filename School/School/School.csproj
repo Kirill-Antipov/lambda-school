@@ -51,6 +51,7 @@
     <Compile Include="ADS\LinkedListExtensions.cs" />
     <Compile Include="ADS\NativeDictionary.cs" />
     <Compile Include="ADS\OrderedList.cs" />
+    <Compile Include="ADS\PowerSet.cs" />
     <Compile Include="ADS\Queue.cs" />
     <Compile Include="ADS\Stack.cs" />
     <Compile Include="ADS\StackTasks.cs" />
