@@ -20,11 +20,17 @@ namespace School.UnitTests.ADS
 
             Assert.True(sut.Size() == 1);
 
-            sut.Remove("abra");
+           var result = sut.Remove("abra");
+
+            Assert.True(result);
 
             Assert.True(sut.Size() == 0);
 
             Assert.False(sut.Get("abra"));
+
+            result = sut.Remove("abra");
+
+            Assert.False(result);
         }
 
         [Fact]
@@ -52,7 +58,7 @@ namespace School.UnitTests.ADS
         }
 
         [Fact]
-        public void Intersection_Works_Correct_When_Empty_Set_Expetced()
+        public void Intersection_Works_Correct_When_Empty_Set_Expected()
         {
             var set1 = GenerateDataSet(5);
             var set2 = GenerateDataSet(5, 5);

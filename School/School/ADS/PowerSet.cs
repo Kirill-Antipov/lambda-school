@@ -109,6 +109,11 @@ namespace AlgorithmsDataStructures
 
         public bool IsSubset(PowerSet<T> set2)
         {
+            if (set2.Size() == 0)
+            {
+                return true;
+            }
+
             foreach (var item in values)
             {
                 if (!set2.Get(item))
