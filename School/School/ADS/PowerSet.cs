@@ -114,9 +114,9 @@ namespace AlgorithmsDataStructures
                 return true;
             }
 
-            foreach (var item in values)
+            foreach (var item in set2.values)
             {
-                if (!set2.Get(item))
+                if (!Get(item))
                 {
                     return false;
                 }

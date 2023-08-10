@@ -96,7 +96,7 @@ namespace School.UnitTests.ADS
             var set1 = GenerateDataSet(5);
             var set2 = GenerateDataSet(3);
 
-            var result = set2.IsSubset(set1);
+            var result = set1.IsSubset(set2);
 
             Assert.True(result);
         }
@@ -105,11 +105,22 @@ namespace School.UnitTests.ADS
         public void IsSubset_Returns_False_When_Mismatch_Exists()
         {
             var set1 = GenerateDataSet(5);
-            var set2 = GenerateDataSet(5, 1);
+            var set2 = GenerateDataSet(3, 3);
 
-            var result = set2.IsSubset(set1);
+            var result = set1.IsSubset(set2);
 
             Assert.False(result);
+        }
+
+        [Fact]
+        public void IsSubset_Returns_True_For_EmptySet()
+        {
+            var set1 = GenerateDataSet(5);
+            var set2 = new PowerSet<string>();
+
+            var result = set1.IsSubset(set2);
+
+            Assert.True(result);
         }
 
         [Fact]
