@@ -1,0 +1,54 @@
+﻿6.1
+
+6.1.1 rate - txConversionRate
+// курс конверсии валют для транзакции
+
+6.1.2 totalAmount - orderTotalAmount
+//финальная сумма по всему заказу
+
+6.1.3 processingStatus - orderProcessingStatus
+//статус обработки заказа
+
+6.1.4 orderHistory - customerOrderHistory
+//история заказов клиента
+
+6.1.5 score - kycRiskScore
+//оценка риска для клиента в контексте процедуры Know Your Customer
+
+
+6.2
+
+6.2.1 MD5Encoder
+
+6.2.2 DatabaseConnectionPool
+
+6.2.3 AuthenticationMiddleware
+
+6.2.4 DataCachingStrategy
+
+
+6.3
+
+6.3.1 UpdateCustomerProfileAddress()
+
+6.3.2 AssignTaskToTeamMember()
+
+6.3.3 FraudDetectionEngineRule
+
+
+6.4
+
+6.4.1 amongTransferMinutesIntervalForFraudCheck - fdeTxIntevalMinutes
+//временной промежуток в минутах для проверки частоты транакзций для оценки шанса мошеннической активности в Fraud Detection Engine
+
+6.4.2 weeeklyTranfersNumberForPotentialFraudCheck - fdeMaxTxInWeek
+//количество переводов пользоватлем за неделю после которого повысится шанс на мошенническую активность в Fraud Detection Engine
+
+6.4.3 transfersMadeByUserLastWeek - userTxsInLastWeek
+//количесвто сделланных пользователем перерводов за последнюю неделю
+
+6.4.4 tranferVolumeFactorForPotentialFraudCheck - fdeTxVolumeFactor
+//коэффициент для провекри сумма перервода при определении моженнической детяльности в Fraud Detection Engine
+
+6.4.5 customerPreferredPaymentMethod -  custLikedPmntMethod
+//платажная опция предпочтительная для пользователя
