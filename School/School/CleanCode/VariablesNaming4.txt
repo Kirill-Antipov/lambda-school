@@ -1,0 +1,35 @@
+1. productPriceList - productPrices
+// переменная хранит цены на товары по запросу пользователя (на самом деле IEnumerable)
+
+2. salesReportObject - salesReport
+// переменная хранящая результат выполонения stored procedure 
+
+3. accountDTO - account
+// перерменная хранящая  data trasfer object с информацие о account сущности
+
+4. orderProcessingFlag -> orderProcessingState
+// перечисление(enum) с актуальным состоянием обработки заказа 
+
+5. taxRateConstant - defaultTaxRate
+// стандартное начальное згачение для подсчета комиссии
+
+6. orderStatusProperty
+// переменная хранит статус заказа взятый из property объекта 
+
+7. userInventory1/userInventory2 - userInventoryOld/userInventoryActual
+// перемнные хранящие актуальное и историческое состояние инвентаря пользователя 
+
+8. interval -> retryIntervalSeconds
+// время ожидания в секундах перед потвором обработки депозита
+
+9. inventoryArray - userInventory
+// переменная с объектом представляющим коллекцию предметов в инвенторе пользователя (на самом деле IEnumerable)
+
+10. expenseTotal - expenseTotalEur
+// сумма всех расходов пользоватлей из выборки в евро
+
+11. depositNotificationTable - depositNotifications
+// перменная хранит объекты записей из таблицы базы данных содержащей информацию о уведомлениях  
+
+12. customerAccountDetails - customerAddress
+// перменная хранит объект с адресными данными пользователя 
