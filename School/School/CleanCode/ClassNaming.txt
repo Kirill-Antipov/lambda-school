@@ -1,0 +1,31 @@
+﻿3.1
+
+3.1.1 UserInfo - UserProfile
+
+3.1.2 DepositNotificationProcessor - DepositNotificationParser
+
+3.1.3 UserData - UserAddress
+
+3.1.4 PaymentProcessing - PaymentService
+
+3.1.5 InternalTransferProcessor - InternalTransferService
+
+3.2
+
+3.2.1 PaymentManager/DepositProcessor/NotificationSender - PaymnetService/DepositService/NotificationService
+//унификация постфикса для "сервисов"
+
+3.2.2 DoTransaction/ProcessTransaction/ExecuteTransaction - ExecuteTransaction
+//унификация - c транзакцией всегда происходит "Execute"
+
+3.2.3 CheckTransaction/IsValidTransaction - ValidateTransaction
+
+3.2.4 FetchCustomer/GetCustomer - GetCustomer
+//методы репозитория с разными терминами на одно и то же действие
+
+3.2.5 InsertOrder/CreateOrder - CreateOrder
+
+3.2.6 ProcessNotification/ParseNotification - ParseNotification
+
+3.2.7 BlockAccount/SuspendAccounts/RestrictUserAccount - SuspendAccount
+//единый теримн для ограчение работы аккаунта - suspend

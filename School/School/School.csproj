@@ -58,6 +58,7 @@
     <Compile Include="ADS\Stack.cs" />
     <Compile Include="ADS\StackTasks.cs" />
     <Compile Include="ADS\StackVariation.cs" />
+    <Content Include="CleanCode\ClassNaming.txt" />
     <Compile Include="CleanCode\VariablesNaming.cs" />
     <Content Include="CleanCode\VariablesNaming4.txt" />
     <Content Include="CleanCode\VariablesNaming2.txt" />
