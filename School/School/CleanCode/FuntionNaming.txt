@@ -1,0 +1,35 @@
+﻿1. GetAmount - CalculateAmountWithoutFee
+//приватный метод. подсчет суммы перевода без учета комиссии
+
+2. StopSubscription - CancelPricingPlanSubscription
+//приватный метод. отменяет для клиента подписку на пониженные комиссии
+
+3. GetReport - GenerateWeeklyReport
+// публичный метод класса SalesReportService. создает недельный отчет для отдела продаж
+
+4. Notify - SendInvoiceEmailToCustomer
+//публичный метод DepositNotificationService. отсылает письмо с прикпелнным инвойсом оплаты
+
+5. ParseData - ParseDepositNotification
+//приватный метод внутри обработки запроса контролером. парсит присалнное сообщение о состоянии депозита
+
+6. ImportData - ImportCustomerDataFromCsv
+//публичный метод класса RegistrationService. Парсит присланный csv файл в коллецию объектов содержащих информацию о клиентах
+
+7. VerifyData - VerifyUserPhoneNumber
+//приватный метод. проверяет присланный номер телефона 
+
+8. ProcessUserLogin - LogLoginAttempt
+// приватный метод. создает записаь с инфорацией о попытке входа в систему (время, успешность, тип приложения и т.д.)
+
+9. GetBankCodefromIban - GetBankCode
+//публичный метод класса Iban. возвращает код банка из значения iban которым был иницииализирован класс
+
+10. GetFee - CalculateCardShippingFee
+// приватный метод. подсчитывает комиссию за отправку пользователю кредитной карты 
+
+11. GenarateReport - GenerateReportAndSendToFtp
+// публичный метод класса WithdrawalReportService. создает отчет и загружает его на сервер
+
+12. ProcessRefund - CalcualateRefundAmount
+// приватный метод. подсчитывает сумму которую надо возместить для транзакции по кредитной карте
