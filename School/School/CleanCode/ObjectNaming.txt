@@ -1,0 +1,52 @@
+3.1
+
+3.1.1 
+
+public class Commission
+{
+	public static Commission Fixed(decimal fixedAmount)
+	{
+	}
+
+	public static Commission Percent(double percent)
+	{
+	}
+
+	public static Commission Combined(decimal fixedAmount, double percent)
+	{
+	}
+}
+
+3.1.2
+
+public class InvoiceDocument
+{
+	public static InvoiceDocument FromFile(string filePath)
+	{
+	}
+
+	public static InvoiceDocument FromBytes(byte[] fileBytes)
+	{
+	}
+}
+
+3.1.3
+
+public class User
+{
+	public static User Business(string companyName, Address businessAddress)
+	{
+	}
+
+	public static User Merchant(string companyName, Uri shopAddress)
+	{
+	}
+}
+
+3.2
+
+3.2.1 interface DepositInvoiceFactory
+
+3.2.2 interface CurrencyFactory
+
+3.2.3 abstract DepositNotificationService
