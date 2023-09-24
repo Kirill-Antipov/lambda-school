@@ -1,0 +1,35 @@
+1. 1 - SYSTEM_CURRENCY_CODE
+//константа вместо magic number для логики подсчета суммы плтажеа в базовой валюте системы
+
+2. ThreeRetries - RETRIES_BEFORE_TX_DECLINE
+//переменование. форматирование. количество попыток для проведения транзакции
+
+3. 1200 - FREE_SHIPPING_THRESHOLD
+//константа вместо magic number для суммы до которой досутпна беспланатя доставка
+
+4. MaxAttempts - MAX_ATTEMPTS_PER_HOUR
+//переменование. форматирование
+
+5. MaxFileSize - MAX_FILE_SIZE
+//форматирование
+
+6. DefaultLanguageCode - DEFAULT_LANGUAGE_CODE
+//форматирование
+
+7. 15000 - MAX_PURCHASE_LIMIT_EUR
+//константа вместо magic number для максимальной суммы покупки на 1 транзакцию 
+
+8. MaxWithdrawalLimit - MAX_WITHDRAWAL_LIMIT_EUR
+//переменование. форматирование. константа для ограничения на снятие денег.
+
+9. 100 - NOTIFICATIONS_TO_RPOCESS_BATCH
+//константа вместо magic number для определения количества записей которые нужно получить за раз  
+
+10. TEN_MB - MAX_REPORT_SIZE
+//переменование
+
+11. "GB" - LOW_RISK_COUNTRY_CODE
+//константа вместо кода страны для определения кода страны с пониженной оценкой риска у клиентов
+
+12. 10000 - NOTIFICATION_AWAIT_TIME_MS
+//константа вместо magic number для определения врмени ожидания доставки уведомления при совершении депозита
