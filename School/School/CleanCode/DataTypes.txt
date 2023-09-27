@@ -1,0 +1,129 @@
+﻿1. добавлена проверка переполнения для подсчета суммарных объемов транзакций за "годы"
+
+checked
+{
+    int volume = 0;
+    foreach(transaction in transactions)
+    {
+        volume += transaction.Amount * transaction.ConversionRate;
+    }
+}
+
+2. доблавена проверка на деление на 0, формально сейчас по логике это не возможно, но все меняется 
+
+public double GetUserAveragePayment(UserStatistic statistic)
+{
+    if(statistic.TxCount == 0)
+    {
+        return 0;
+    }
+
+    return statistic.Volume / statistic.TxCount
+}
+
+3. тип передаываемого в метод значения amount изменен с decimal на int, тк метод работает только для валюты "иена", а у них нету "копеек"
+
+4. тип перменной fee изменен с double на decimal, чтобы операции с пермернной amount были в контексте одного и того же типа.
+
+public Result Validate(decimal amount, decimal fee)
+{
+    if (fee >= amount)
+    {
+        return Result.Failed;
+    }
+
+    ...
+}
+
+5. "магическая" строка "cbp" выделена в константу
+
+private const string CANCELED_STATUS = "cbp"
+
+public void ProcessPayment(Payment payment)
+{
+    if(payment.Status == CANCELED_STATUS)
+    {
+        return;
+    }
+
+    ...
+}
+
+6. одно логическое выражение разбито на несколько
+
+public bool IsBlockedPayment(User user, Payment payment)
+{
+    var blockedByHighAmount = user.UnderReview && Payment.Amount > 1000;
+    var blockedByRisk = user.RiskState == RiskState.High;
+
+    return blockedByHighAmount || blockedByRisk;
+}
+
+7. константа вместо строки
+
+private const string REFUND_TYPE = "u";
+private const string DEPOSIT_TYPE = "f";
+
+public void ProcessNotification(Notification notification)
+{
+    if(notification.Type = REFUND_TYPE)
+    {
+        ...
+    }
+
+    if(notification.Type = DEPOSIT_TYPE)
+    {
+        ...
+    }
+}
+
+8. добавлена проверка переполнения в промежуточных вычислениях статистик по торговле пользователей на бирже
+
+public ReportResult Report(Users users, TradingData tradingData)
+{
+    var lossVolume = 0;
+    foreach(user in Users)
+    {
+        var userTransactions = tradingData.Where(_ => _.UserId == user.Id);
+        var userLossVolume = userTransactions.Where(_ => _.State = State.Loss);
+
+        checked
+        {
+            lossVolume += userLossVolume;
+        }
+    }
+}
+
+9. одно логическое выражение разбито на несколько
+public bool IsEligibleForDiscount(user)
+{
+    var firstTransfer = user.Payments.Count == 1;
+    var eliteUser = user.Status == Status.Elite && user.TransferVolume > 100000;
+
+    return firstTransfer || eliteUser;
+}
+
+
+10. одно логическое выражение разбито на несколько
+public bool DeniedByRisk(User user)
+{
+    var ukHighRisk = user.Country = "GB" && user.RiskLevel == RiskLevel.High;
+    var thirdCountry = highRiskCountries.Contains(user.Country);
+    var deniedByAge = user.Age > 75 && user.Level < 5;
+
+    return ukHighRisk || thirdCountry || deniedByAge;
+}
+
+11. одно логическое выражение разбито на несколько
+public bool IsThirdPartyPayment(User user, Payment payment, WhitelistConfig whitelist)
+{
+    var payerMissmatch = payment.Payer.Name != user.Name && config.CheckPayer; 
+    var payeeMissmatch = payment.Payee.Name != user.Name && config.CheckPayee;
+
+    var whitelisted = whitelist.Names.Contains(payment.Payer);
+
+    return (payerMissmatch && !whitelisted) || payeeMissmatch;
+    
+}
+
+12. Добавлены округления до 2 знаков в логике подсчета начисления бонусов после депозита. суммы пересчитыались в евро, без округелния не всегда бы совпадали финальные числа.
