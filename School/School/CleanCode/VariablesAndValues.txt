@@ -1,0 +1,127 @@
+﻿1. объявление перменной fee перенесенно из начала метода к месту ее использования
+
+public void ProcessPayment(Notification notification)
+{
+    var fee = 0; //before changes
+    var depositAmount = 0; //before changes
+
+    ValidateAmount(notification.Amount);
+
+    var user = GetUser(notification.UserId);
+
+    BlockAccount(user);
+    
+    var fee = GetFee(); //after changes
+
+    var depositAmount = amount - fee; 
+
+    ProcessDeposit(depositAmount, notification);
+}
+
+
+2. убрал раннее объявление перменной monthlyPayment и в целом избавился от нее за ненадобностью
+
+public static decimal CalculateMonthlyPayment(decimal loanAmount, decimal annualInterestRate, int loanTermInMonths)
+{
+    var monthlyPayment = 0; // before 
+
+    var monthlyInterestRate = annualInterestRate / 12 / 100;
+
+    var numerator = loanAmount * monthlyInterestRate * (decimal)Math.Pow(1 + (double)monthlyInterestRate, loanTermInMonths);
+    var denominator = (decimal)Math.Pow(1 + (double)monthlyInterestRate, loanTermInMonths) - 1;
+    monthlyPayment = numerator / denominator; //before
+
+    return numerator / denominator; //after
+}
+
+3. убранно раннее объявление переменной transactionRecord с значением null. теперь определяется сразу с инициализацией перед использованием.
+
+public static void ExecuteTransaction(Account account, decimal transactionAmount)
+{
+    if (!account.IsActive)
+    {
+        return;
+    }
+
+    if (transactionAmount > account.DailyTransactionLimit)
+    {
+        return;
+    }
+
+    TransactionRecord transactionRecord  = null;//before
+    if (account.Balance >= transactionAmount)
+    {
+        account.Balance -= transactionAmount;
+        transactionRecord = new TransactionRecord //now
+        {
+            TransactionType = "Debit",
+            Amount = transactionAmount,
+            Timestamp = DateTime.Now
+        });
+
+        account.TransactionHistory.Add(transactionRecord);
+    }
+}
+
+4. инициалзация полей и свойств класса перенасена в конструктор  
+
+public class Account
+{
+    public bool IsActive;
+    public decimal Balance;
+    public decimal DailyTransactionLimit { get; set; }
+    public List<TransactionRecord> TransactionHistory { get; set; }
+
+    public Account()
+    {
+        IsActive = false;
+        DailyTransactionLimit = GetConfiguration("DailyLimit");
+        TransactionHistory = new List<TransactionRecord>();
+    }
+}
+
+5. перменной depositAmount после использования присвоено значение -1
+
+6.  переменной userEmail после использования присвоено зачение "empty"
+
+7.  перменной finalCommission после использования присвено значение -1
+
+8.  переменной bonusFactor присвоено значение 1 после использования
+
+9. в метод CalculateSimpleInterest(decimal principal, decimal annualInterestRate, int numberOfYears) добавлена проверка входных парметров (>=0)
+
+10. в метод public static decimal CalculateTotalReturn(decimal initialInvestment, decimal finalValue, decimal additionalContributions) добавлена проверка входных парметров (>=0)
+
+11. в метод public IsThirdParty(string userName, string payerName) добавлена проверка входных парметров (string.NotNullOrWhitepsace)
+
+12. в метод public bool BlockPayment(User user, Payment payment, decimal blockRatio) добавлена проверка парметра blockRatio (0 < blockRatio < 1)
+
+13. переменная complianceState заменена на 2 константы
+
+private const string COMPLIANCE_STARTED_STATE = "INPROGRESS";
+private const string COMPLIANCE_DELAYED_STATE = "DELAYED";
+
+public void StartCompliance(User user)
+{
+    if (config.DelayCompliance)
+    {
+        user.ComplianceState = COMPLIANCE_DELAYED_STATE;
+    }
+
+    user.ComplianceState = COMPLIANCE_STARTED_STATE;
+}
+
+14. перменная цикла m определяется в самом теле цикла вместо определения вне
+
+public decimal ReportVolumeInLeftMonths()
+{
+    for(int m = GetLastMonth(); m <= 12; m++)
+    {
+        ...
+    }
+}
+
+15. перменная defaultInterestRate (=0.3) становится константой ввиду того, что ее значение на самом деле не меняется, а просто переиспользуется по ходу логики
+
+
+
