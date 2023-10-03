@@ -62,6 +62,7 @@
     <Content Include="CleanCode\ConstantNaming.txt" />
     <Content Include="CleanCode\FuntionNaming.txt" />
     <Content Include="CleanCode\DataTypes.txt" />
+    <Content Include="CleanCode\VariableLifetime.txt" />
     <Content Include="CleanCode\VariablesAndValues.txt" />
     <Compile Include="CleanCode\VariablesNaming.cs" />
     <Content Include="CleanCode\ObjectNaming.txt" />
