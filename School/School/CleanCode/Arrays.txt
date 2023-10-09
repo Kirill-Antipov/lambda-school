@@ -1,0 +1,127 @@
+﻿1. Переход к типу перечисления вместо работы с массивом и индексами
+public void ProcessUsers()
+{
+    for(int i = 0; i< users.Length; i++)
+    {
+        ...
+    }
+}
+
+After:
+public void ProcessUsers()
+{
+    foreach(var user in users)
+    {
+        ...
+    }
+}
+
+2. замена массива на словарь
+
+private PostActions[] actions = new PostActions[3] { SuccessAction, PendingAction, FailedAction };
+
+public void ExecutePostaction(string action)
+{
+    var action = actions.Where(a => a.Name == "action");
+
+    ...
+}
+
+After:
+private Dictionary actions = new Dictionary
+{
+    { "success", SuccessAction },
+    { "pending", PendingAction },
+    { "failed", FailedAction }
+};
+
+public void ExecutePostaction(string action)
+{
+    var action = actions[action];
+
+    ...
+}
+
+3. массив заменен на стек
+
+public void SendRequiredNotifications(IEnumerable<Transfer> transfers)
+{
+    var notifications = new Notifications[transfers.Count()];
+    
+    foreach(transfer in transfers)
+    {
+        ..
+        notifications[i] = new Notification(tranfer.Sender, transfer.Amount);
+        ...
+    }
+
+    SendNotifications(notifications);
+}
+
+After:
+public void SendRequiredNotifications(IEnumerable<Transfer> transfers)
+{
+    var notifications = new Stack<Notification>();
+    
+    foreach(transfer in transfers)
+    {
+        ..
+        notifications.Push(new Notification(tranfer.Sender, transfer.Amount));
+        ...
+    }
+
+    SendNotifications(notifications);
+}
+
+4. массив заменен на очередь
+private Task[] tasks;
+
+...
+
+public void AddTask(Task task)
+{
+    ...
+}
+
+After:
+private Queue<Task> tasks;
+
+...
+
+public void AddTask(Task task)
+{
+    ...
+}
+
+5. массив завменен на множество
+
+private string[] providers = new string[] { "YProvider", "SmmProvider", "ZorProvider" };
+
+public void ConnectThirdPartyProviders()
+{
+    foreach(var provder in providers)
+    {
+        var endpoint = config.GetByProviderName(provider);
+        Connect(endpoint);
+    }
+}
+
+After:
+private HastSet<string> providers = 
+
+ctor()
+{
+    providers = new HashSet<string>();
+    providers.Add("YProvider");
+    providers.Add("SmmProvider");
+    providers.Add("ZorProvider");
+}
+
+public void ConnectThirdPartyProviders()
+{
+    foreach(var provder in providers)
+    {
+        var endpoint = config.GetByProviderName(provider);
+        Connect(endpoint);
+    }
+}
