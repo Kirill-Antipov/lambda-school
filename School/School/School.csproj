@@ -65,6 +65,7 @@
     <Content Include="CleanCode\VariableLifetime.txt" />
     <Content Include="CleanCode\VariablesAndValues.txt" />
     <Content Include="CleanCode\Arrays.txt" />
+    <Content Include="CleanCode\Comments.txt" />
     <Compile Include="CleanCode\VariablesNaming.cs" />
     <Content Include="CleanCode\ObjectNaming.txt" />
     <Content Include="CleanCode\VariablesBinding.txt" />
