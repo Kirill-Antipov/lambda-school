@@ -66,6 +66,7 @@
     <Content Include="CleanCode\VariablesAndValues.txt" />
     <Content Include="CleanCode\Arrays.txt" />
     <Content Include="CleanCode\Comments.txt" />
+    <Content Include="CleanCode\CorrectComments.txt" />
     <Compile Include="CleanCode\VariablesNaming.cs" />
     <Content Include="CleanCode\ObjectNaming.txt" />
     <Content Include="CleanCode\VariablesBinding.txt" />

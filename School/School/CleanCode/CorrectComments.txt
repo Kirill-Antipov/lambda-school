@@ -1,0 +1,23 @@
+﻿1.2 //first call made to make sure server is up and to prevent timeout
+
+2.3 //current lib version can throw stackoverflow thats why it is catched. remove after fix
+
+3.1 //skips dummy data and returns start of the file in provided byte stream
+
+4.4 //this settings must be synced across env's to prevent data corruption 
+
+5.4 //adjusting this configuration can slow down the system since cache will be cleared
+
+6.3 //handle cases where the user's time zone is not set even though documentation incorrectly states it's mandatory
+
+7.5 //mail server do not support this chars so they must be removed
+
+8.5 //on this step data is still encrypted so 'save' should not be called   
+
+9.5 //login timestampt must be updated in first place for logic to function correctly
+
+10.6 //TODO: get rid of lib since not supported anymore
+
+11.6 //TODO: remove all related logic. turned off in production
+
+12.6 //TODO: add cache. method is highly used according to metrics
