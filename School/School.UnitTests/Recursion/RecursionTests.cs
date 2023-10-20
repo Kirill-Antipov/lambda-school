@@ -1,4 +1,5 @@
-﻿using School.Recursion;
+﻿using AlgorithmsDataStructures;
+using School.Recursion;
 using Xunit;
 
 namespace School.UnitTests.Recursion
@@ -26,6 +27,42 @@ namespace School.UnitTests.Recursion
             var result = Task2.SumDigitsInNumber(number);
 
             Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Length_Returns_CorrectResult()
+        {
+            var stack = new Stack<int>();
+
+            stack.Push(1);
+            stack.Push(1);
+            stack.Push(1);
+            stack.Push(1);
+            stack.Push(1);
+
+            var result = Task3.Length(stack);
+
+            Assert.True(result == 5);
+        }
+
+        [Fact]
+        public void Length_Returns_Zero_On_EmptyStack()
+        {
+            var stack = new Stack<int>();
+
+            var result = Task3.Length(stack);
+
+            Assert.True(result == 0);
+        }
+
+        [Theory]
+        [InlineData("palindrome", false)]
+        [InlineData("abba", true)]
+        public void IsPalindrome_Returns_CorrectResult(string word, bool expetcedResut)
+        {
+            var result = Task4.IsPalindrome(word);
+
+            Assert.Equal(expetcedResut, result);
         }
     }
 }

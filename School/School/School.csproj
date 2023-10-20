@@ -60,6 +60,8 @@
     <Compile Include="ADS\StackVariation.cs" />
     <Compile Include="Recursion\Task1.cs" />
     <Compile Include="Recursion\Task2.cs" />
+    <Compile Include="Recursion\Task3.cs" />
+    <Compile Include="Recursion\Task4.cs" />
     <Content Include="CleanCode\BadComments.txt" />
     <Content Include="CleanCode\ClassNaming.txt" />
     <Content Include="CleanCode\ConstantNaming.txt" />
