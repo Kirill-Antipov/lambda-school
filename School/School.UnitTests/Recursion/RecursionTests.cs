@@ -1,5 +1,7 @@
 ﻿using AlgorithmsDataStructures;
 using School.Recursion;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace School.UnitTests.Recursion
@@ -32,7 +34,7 @@ namespace School.UnitTests.Recursion
         [Fact]
         public void Length_Returns_CorrectResult()
         {
-            var stack = new Stack<int>();
+            var stack = new AlgorithmsDataStructures.Stack<int>();
 
             stack.Push(1);
             stack.Push(1);
@@ -48,7 +50,7 @@ namespace School.UnitTests.Recursion
         [Fact]
         public void Length_Returns_Zero_On_EmptyStack()
         {
-            var stack = new Stack<int>();
+            var stack = new AlgorithmsDataStructures.Stack<int>();
 
             var result = Task3.Length(stack);
 
@@ -63,6 +65,18 @@ namespace School.UnitTests.Recursion
             var result = Task4.IsPalindrome(word);
 
             Assert.Equal(expetcedResut, result);
+        }
+
+        [Theory]
+        [InlineData(5, 2, 5, 4, 3, 5)]
+        [InlineData(5, 5, 1 ,1, 1, 1, 1, 5)]
+        [InlineData(1, 1, 1, 2, 1, 1)]
+        [InlineData(2, 3, 2)]
+        public void GetSecondMaxElement_Returns_Correct_Result(int expectedResult, params int[] input)
+        {
+            var result = Task7.GetSecondMaxElement(input.ToList());
+
+            Assert.Equal(expectedResult, result);
         }
     }
 }
