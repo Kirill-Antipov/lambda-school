@@ -17,4 +17,9 @@
     <ProjectReference Include="..\School\School.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Recursion\TestFiles\Level1_1\Level2_1\Level3_1\" />
+    <Folder Include="Recursion\TestFiles\Level1_2\Level2_2\" />
+  </ItemGroup>
+
 </Project>

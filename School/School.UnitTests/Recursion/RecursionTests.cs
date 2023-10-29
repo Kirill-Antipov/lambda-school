@@ -78,5 +78,21 @@ namespace School.UnitTests.Recursion
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Fact]
+        public void Find_All_Files()
+        {
+            var result = Task8.GetAllFiles("../../../Recursion/TestFiles");
+
+            Assert.Equal(5, result.Count);
+
+            var fileNames = result.Select(_ => _.Split('\\').Last()).ToList();
+
+            Assert.Contains("file.txt", fileNames);
+            Assert.Contains("file1.txt", fileNames);
+            Assert.Contains("file2.txt", fileNames);
+            Assert.Contains("file3.txt", fileNames);
+            Assert.Contains("file4.txt", fileNames);
+        }
     }
 }
