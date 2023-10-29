@@ -8,17 +8,12 @@ namespace School.Recursion
         {
             number = Math.Abs(number);
 
-            return SumDigits(number);
-        }
-
-        private static int SumDigits(int number)
-        {
             if (number < 10)
             {
                 return number;
             }
 
-            return number % 10 + SumDigits(number / 10);
+            return number % 10 + SumDigitsInNumber(number / 10);
         }
     }
 }

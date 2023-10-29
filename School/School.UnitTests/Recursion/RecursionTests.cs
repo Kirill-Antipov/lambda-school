@@ -94,5 +94,19 @@ namespace School.UnitTests.Recursion
             Assert.Contains("file3.txt", fileNames);
             Assert.Contains("file4.txt", fileNames);
         }
+
+        [Fact]
+        public void Should_Generate_All_Combinations()
+        {
+            var result = Task9.GenerateParenthesisCombinations(3);
+
+            Assert.Equal(5, result.Count);
+
+            Assert.Contains("((()))", result);
+            Assert.Contains("(()())", result);
+            Assert.Contains("(())()", result);
+            Assert.Contains("()(())", result);
+            Assert.Contains("()()()", result);
+        }
     }
 }
