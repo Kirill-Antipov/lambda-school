@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADS2\SimpleTree.cs" />
+    <Compile Include="ADS2\SimpleTreeExtensions.cs" />
     <Compile Include="ADS\BloomFilter.cs" />
     <Compile Include="ADS\Deque.cs" />
     <Compile Include="ADS\DynArray.cs" />
