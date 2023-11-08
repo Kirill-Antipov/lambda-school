@@ -20,13 +20,14 @@ namespace School.Recursion
             {
                 return GetSecondMaxElement(input, current + 1, input[current], max);
             }
-
-            if (input[current] >= result)
+            else if (input[current] >= result)
             {
                 return GetSecondMaxElement(input, current + 1, max, input[current]);
             }
-
-            return GetSecondMaxElement(input, current + 1, max, result);
+            else 
+            {
+                return GetSecondMaxElement(input, current + 1, max, result);
+            }
         }
     }
 }
