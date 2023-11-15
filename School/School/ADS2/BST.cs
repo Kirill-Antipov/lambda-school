@@ -116,9 +116,10 @@ namespace AlgorithmsDataStructures2
             if (currentNode.LeftChild != null && currentNode.RightChild != null)
             {
                 BSTNode<T> successor = FinMinMax(currentNode.RightChild, false);
+                DeleteNodeByKey(successor.NodeKey);
                 currentNode.NodeKey = successor.NodeKey;
                 currentNode.NodeValue = successor.NodeValue;
-                DeleteNodeByKey(successor.NodeKey);
+                return true;
             }
 
             BSTNode<T> child = currentNode.LeftChild ?? currentNode.RightChild;
@@ -174,6 +175,8 @@ namespace AlgorithmsDataStructures2
                 findResult.ToLeft = true;
 
                 FindNodeByKey(currentNode.LeftChild, key, findResult);
+
+                return;
             }
 
             findResult.ToLeft = false;

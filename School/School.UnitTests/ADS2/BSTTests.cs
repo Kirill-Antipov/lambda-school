@@ -17,6 +17,34 @@ namespace School.UnitTests.ADS2
         }
 
         [Fact]
+        public void Not_Existing_Node_Not_Found_Right()
+        {
+            var root = new BSTNode<int>(0, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(1, 1);
+
+            var result = tree.FindNodeByKey(2);
+
+            Assert.False(result.NodeHasKey);
+            Assert.False(result.ToLeft);
+        }
+
+        [Fact]
+        public void Not_Existing_Node_Not_Found_Left()
+        {
+            var root = new BSTNode<int>(2, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(1, 1);
+
+            var result = tree.FindNodeByKey(0);
+
+            Assert.False(result.NodeHasKey);
+            Assert.True(result.ToLeft);
+        }
+
+        [Fact]
         public void Right_And_Left_Nodes_Added_To_Tree()
         {
             var root = new BSTNode<int>(2, 0, null);
@@ -75,6 +103,22 @@ namespace School.UnitTests.ADS2
         }
 
         [Fact]
+        public void Min_Key_Found_In_Subtree()
+        {
+            var root = new BSTNode<int>(2, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(1, 1);
+            tree.AddKeyValue(3, 1);
+            tree.AddKeyValue(5, 1);
+            tree.AddKeyValue(7, 1);
+
+            var result = tree.FinMinMax(root.RightChild, false);
+
+            Assert.Equal(3, result.NodeKey);
+        }
+
+        [Fact]
         public void Max_Key_Found()
         {
             var root = new BSTNode<int>(2, 0, null);
@@ -88,6 +132,23 @@ namespace School.UnitTests.ADS2
             var result = tree.FinMinMax(root, true);
 
             Assert.Equal(7, result.NodeKey);
+        }
+
+        [Fact]
+        public void Max_Key_Found_In_Subtree()
+        {
+            var root = new BSTNode<int>(2, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(1, 1);
+            tree.AddKeyValue(-1, 1);
+            tree.AddKeyValue(3, 1);
+            tree.AddKeyValue(5, 1);
+            tree.AddKeyValue(7, 1);
+
+            var result = tree.FinMinMax(root.LeftChild, true);
+
+            Assert.Equal(1, result.NodeKey);
         }
 
         [Fact]
@@ -107,7 +168,7 @@ namespace School.UnitTests.ADS2
         }
 
         [Fact]
-        public void Left_Child_Deleted()
+        public void Left_Leaf_Deleted()
         {
             var root = new BSTNode<int>(2, 0, null);
             var tree = new BST<int>(root);
@@ -121,6 +182,46 @@ namespace School.UnitTests.ADS2
 
             Assert.True(result);
             Assert.Null(root.LeftChild);
+        }
+
+        [Fact]
+        public void Right_Leaf_Deleted()
+        {
+            var root = new BSTNode<int>(2, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(1, 1);
+            tree.AddKeyValue(3, 1);
+            tree.AddKeyValue(5, 1);
+            tree.AddKeyValue(7, 1);
+
+            var result = tree.DeleteNodeByKey(7);
+
+            Assert.True(result);
+            Assert.Null(root.RightChild.RightChild.RightChild);
+        }
+
+        [Fact]
+        public void Node_With_Children_Deleted()
+        {
+            var root = new BSTNode<int>(20, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(10, 1);
+            tree.AddKeyValue(9, 1);
+            tree.AddKeyValue(8, 1);
+            tree.AddKeyValue(16, 1);
+            tree.AddKeyValue(15, 1);
+            tree.AddKeyValue(17, 1);
+            tree.AddKeyValue(30, 1);
+            tree.AddKeyValue(18, 1);
+            tree.AddKeyValue(50, 1);
+            tree.AddKeyValue(70, 1);
+
+            var result = tree.DeleteNodeByKey(10);
+
+            Assert.True(result);
+            Assert.True(root.LeftChild.NodeKey == 15);
         }
     }
 }
