@@ -1,4 +1,5 @@
 ﻿using AlgorithmsDataStructures2;
+using System.Collections.Generic;
 using Xunit;
 
 namespace School.UnitTests.ADS2
@@ -222,6 +223,123 @@ namespace School.UnitTests.ADS2
 
             Assert.True(result);
             Assert.True(root.LeftChild.NodeKey == 15);
+        }
+
+        [Fact]
+        public void Can_Go_Wide_Through_Tree()
+        {
+            var root = new BSTNode<int>(6, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(4, 1);
+            tree.AddKeyValue(3, 1);
+            tree.AddKeyValue(5, 1);
+            tree.AddKeyValue(8, 1);
+            tree.AddKeyValue(7, 1);
+            tree.AddKeyValue(9, 1);
+
+            var expectedResult = new int[] { 6, 4 , 8, 3, 5, 7, 9 };
+
+            var result = tree.WideAllNodes().ToArray();
+
+            for (int i = 0; i < expectedResult.Length; i++)
+            {
+                Assert.Equal(expectedResult[i], result[i].NodeKey);
+            }
+        }
+
+        [Fact]
+        public void Can_Go_Deep_Through_Tree_InOrder()
+        {
+            var root = new BSTNode<int>(6, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(4, 1);
+            tree.AddKeyValue(3, 1);
+            tree.AddKeyValue(5, 1);
+            tree.AddKeyValue(8, 1);
+            tree.AddKeyValue(7, 1);
+            tree.AddKeyValue(9, 1);
+
+            var expectedResult = new int[] { 3, 4, 5, 6, 7, 8, 9 };
+
+            var result = tree.DeepAllNodes(0).ToArray();
+
+            for (int i = 0; i < expectedResult.Length; i++)
+            {
+                Assert.Equal(expectedResult[i], result[i].NodeKey);
+            }
+        }
+
+        [Fact]
+        public void Can_Go_Deep_Through_Tree_PostOrder()
+        {
+            var root = new BSTNode<int>(6, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(4, 1);
+            tree.AddKeyValue(3, 1);
+            tree.AddKeyValue(5, 1);
+            tree.AddKeyValue(8, 1);
+            tree.AddKeyValue(7, 1);
+            tree.AddKeyValue(9, 1);
+
+            var expectedResult = new int[] { 3, 5, 4, 7, 9, 8, 6 };
+
+            var result = tree.DeepAllNodes(1).ToArray();
+
+            for (int i = 0; i < expectedResult.Length; i++)
+            {
+                Assert.Equal(expectedResult[i], result[i].NodeKey);
+            }
+        }
+
+        [Fact]
+        public void Can_Go_Deep_Through_Tree_PreOrder()
+        {
+            var root = new BSTNode<int>(6, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(4, 1);
+            tree.AddKeyValue(3, 1);
+            tree.AddKeyValue(5, 1);
+            tree.AddKeyValue(8, 1);
+            tree.AddKeyValue(7, 1);
+            tree.AddKeyValue(9, 1);
+
+            var expectedResult = new int[] { 6, 4, 3, 5, 8, 7, 9 };
+
+            var result = tree.DeepAllNodes(2).ToArray();
+
+            for (int i = 0; i < expectedResult.Length; i++)
+            {
+                Assert.Equal(expectedResult[i], result[i].NodeKey);
+            }
+        }
+
+        [Fact]
+        public void Tree_Inverted()
+        {
+            var root = new BSTNode<int>(6, 0, null);
+            var tree = new BST<int>(root);
+
+            tree.AddKeyValue(4, 1);
+            tree.AddKeyValue(3, 1);
+            tree.AddKeyValue(5, 1);
+            tree.AddKeyValue(8, 1);
+            tree.AddKeyValue(7, 1);
+            tree.AddKeyValue(9, 1);
+
+            tree.Invert();
+
+            var expectedResult = new int[] { 6, 8, 4, 9, 7, 5, 3 };
+
+            var result = tree.WideAllNodes().ToArray();
+
+            for (int i = 0; i < expectedResult.Length; i++)
+            {
+                Assert.Equal(expectedResult[i], result[i].NodeKey);
+            }
         }
     }
 }

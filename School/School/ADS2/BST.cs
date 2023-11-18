@@ -3,17 +3,25 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-    public class BSTNode<T>
+    public class BSTNode
     {
         public int NodeKey;
+
+        protected BSTNode(int key)
+        {
+            NodeKey = key;
+        }
+    }
+
+    public class BSTNode<T> : BSTNode
+    {
         public T NodeValue;
         public BSTNode<T> Parent;
         public BSTNode<T> LeftChild;
         public BSTNode<T> RightChild;
 
-        public BSTNode(int key, T val, BSTNode<T> parent)
+        public BSTNode(int key, T val, BSTNode<T> parent) : base(key)
         {
-            NodeKey = key;
             NodeValue = val;
             Parent = parent;
             LeftChild = null;
@@ -146,6 +154,65 @@ namespace AlgorithmsDataStructures2
             return true;
         }
 
+        public List<BSTNode> WideAllNodes()
+        {
+            List<BSTNode> result = new List<BSTNode>();
+            Queue<BSTNode<T>> queue = new Queue<BSTNode<T>>();
+
+            if (Root != null)
+            {
+                queue.Enqueue(Root);
+            }
+
+            while (queue.Count > 0)
+            {
+                BSTNode<T> current = queue.Dequeue();
+                result.Add(current);
+
+                if (current.LeftChild != null)
+                {
+                    queue.Enqueue(current.LeftChild);
+                }
+
+                if (current.RightChild != null)
+                {
+                    queue.Enqueue(current.RightChild);
+                }
+            }
+
+            return result;
+        }
+
+        public List<BSTNode> DeepAllNodes(int order)
+        {
+            if (order < 0 && order > 2)
+            {
+                throw new ArgumentOutOfRangeException(nameof(order));
+            }
+
+            List<BSTNode> result = new List<BSTNode>();
+
+            if (order == 0)
+            {
+                InOrderTraversal(Root, result);
+                return result;
+            }
+
+            if (order == 1)
+            {
+                PostOrderTraversal(Root, result);
+                return result;
+            }
+
+            PreOrderTraversal(Root, result);
+            return result;
+        }
+
+        public void Invert()
+        {
+            Invert(Root);
+        }
+
         public int Count()
         {
             return CountNodes(Root);
@@ -206,6 +273,57 @@ namespace AlgorithmsDataStructures2
                 return 0;
 
             return 1 + CountNodes(node.LeftChild) + CountNodes(node.RightChild);
+        }
+
+        private void InOrderTraversal(BSTNode<T> node, List<BSTNode> result)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            InOrderTraversal(node.LeftChild, result);
+            result.Add(node);
+            InOrderTraversal(node.RightChild, result);
+        }
+
+        private void PreOrderTraversal(BSTNode<T> node, List<BSTNode> result)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            result.Add(node);
+            PreOrderTraversal(node.LeftChild, result);
+            PreOrderTraversal(node.RightChild, result);
+        }
+
+        private void PostOrderTraversal(BSTNode<T> node, List<BSTNode> result)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            PostOrderTraversal(node.LeftChild, result);
+            PostOrderTraversal(node.RightChild, result);
+            result.Add(node);
+        }
+
+        private void Invert(BSTNode<T> node)
+        {
+            if (node == null)
+            {
+                return;
+            }
+
+            BSTNode<T> temp = node.LeftChild;
+            node.LeftChild = node.RightChild;
+            node.RightChild = temp;
+
+            Invert(node.LeftChild);
+            Invert(node.RightChild);
         }
     }
 }
