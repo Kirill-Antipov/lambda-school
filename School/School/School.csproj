@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ADS2\aBST.cs" />
+    <Compile Include="ADS2\BalancedBST.cs" />
     <Compile Include="ADS2\BST.cs" />
     <Compile Include="ADS2\SimpleTree.cs" />
     <Compile Include="ADS2\SimpleTreeExtensions.cs" />
