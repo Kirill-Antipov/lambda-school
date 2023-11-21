@@ -1,4 +1,9 @@
 ﻿using AlgorithmsDataStructures2;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace School.UnitTests.ADS2
@@ -6,35 +11,52 @@ namespace School.UnitTests.ADS2
     public class BalancedBSTTests
     {
         [Fact]
-        public void BalancedTree_Array_Created_Height_1()
+        public void BalancedBST_Built()
         {
-            var inputArray = new int[] { 2, 3, 1 };
-            var treeArray = BalancedBST.GenerateBBSTArray(inputArray);
+            var inputArray = new int[] {3, 4, 6, 5, 9, 8, 7 };
+            var tree = new BalancedBST(); 
+            tree.GenerateTree(inputArray);
 
-            Assert.Equal(3, treeArray.Length);
+            Assert.True(tree.Root.Level == 0);
+            Assert.True(tree.Root.LeftChild.Level == 1);
+            Assert.True(tree.Root.RightChild.Level == 1);
 
-            var expectedResult = new int[] { 2, 1, 3, };
+            Assert.True(tree.Root.RightChild.NodeKey >= tree.Root.NodeKey);
+            Assert.True(tree.Root.LeftChild.NodeKey < tree.Root.NodeKey);
 
-            for (int i = 0; i < expectedResult.Length; i++)
-            {
-                Assert.Equal(treeArray[i], expectedResult[i]);
-            }
+            Assert.True(tree.Root.LeftChild.LeftChild.Level == 2);
+            Assert.True(tree.Root.LeftChild.RightChild.Level == 2);
+
+            Assert.True(tree.Root.RightChild.RightChild.NodeKey >= tree.Root.RightChild.NodeKey);
+            Assert.True(tree.Root.RightChild.LeftChild.NodeKey < tree.Root.RightChild.NodeKey);
         }
 
         [Fact]
-        public void BalancedTree_Array_Created_Height_3()
+        public void Tree_Balanced()
         {
-            var inputArray = new int[] { 3, 4, 5, 9, 8, 7 ,6 };
-            var treeArray = BalancedBST.GenerateBBSTArray(inputArray);
+            var inputArray = new int[] { 3, 4, 6, 5, 9, 8, 7 };
+            var tree = new BalancedBST();
+            tree.GenerateTree(inputArray);
 
-            Assert.Equal(7, treeArray.Length);
+            var result = tree.IsBalanced(tree.Root);
 
-            var expectedResult = new int[] { 6, 4, 8, 3, 5, 7, 9 };
+            Assert.True(result);
+        }
 
-            for (int i = 0; i < expectedResult.Length; i++)
-            {
-                Assert.Equal(treeArray[i], expectedResult[i]);
-            }
+        [Fact]
+        public void Tree_Unbalanced()
+        {
+            var inputArray = new int[] { 3, 4, 6, 5, 9 };
+            var tree = new BalancedBST();
+            tree.GenerateTree(inputArray);
+
+            tree.Root.LeftChild.LeftChild = new BSTNode(2, tree.Root.LeftChild);
+            tree.Root.LeftChild.LeftChild.LeftChild = new BSTNode(1, tree.Root.LeftChild.LeftChild);
+            tree.Root.LeftChild.LeftChild.LeftChild.LeftChild = new BSTNode(0, tree.Root.LeftChild.LeftChild.LeftChild);
+
+            var result = tree.IsBalanced(tree.Root);
+
+            Assert.False(result);
         }
     }
 }

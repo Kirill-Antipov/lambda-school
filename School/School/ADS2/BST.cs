@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-    public class BSTNode
+    public class NodeBase
     {
         public int NodeKey;
 
-        protected BSTNode(int key)
+        protected NodeBase(int key)
         {
             NodeKey = key;
         }
     }
 
-    public class BSTNode<T> : BSTNode
+    public class BSTNode<T> : NodeBase
     {
         public T NodeValue;
         public BSTNode<T> Parent;
@@ -154,9 +154,9 @@ namespace AlgorithmsDataStructures2
             return true;
         }
 
-        public List<BSTNode> WideAllNodes()
+        public List<NodeBase> WideAllNodes()
         {
-            List<BSTNode> result = new List<BSTNode>();
+            List<NodeBase> result = new List<NodeBase>();
             Queue<BSTNode<T>> queue = new Queue<BSTNode<T>>();
 
             if (Root != null)
@@ -183,14 +183,14 @@ namespace AlgorithmsDataStructures2
             return result;
         }
 
-        public List<BSTNode> DeepAllNodes(int order)
+        public List<NodeBase> DeepAllNodes(int order)
         {
             if (order < 0 && order > 2)
             {
                 throw new ArgumentOutOfRangeException(nameof(order));
             }
 
-            List<BSTNode> result = new List<BSTNode>();
+            List<NodeBase> result = new List<NodeBase>();
 
             if (order == 0)
             {
@@ -275,7 +275,7 @@ namespace AlgorithmsDataStructures2
             return 1 + CountNodes(node.LeftChild) + CountNodes(node.RightChild);
         }
 
-        private void InOrderTraversal(BSTNode<T> node, List<BSTNode> result)
+        private void InOrderTraversal(BSTNode<T> node, List<NodeBase> result)
         {
             if (node == null)
             {
@@ -287,7 +287,7 @@ namespace AlgorithmsDataStructures2
             InOrderTraversal(node.RightChild, result);
         }
 
-        private void PreOrderTraversal(BSTNode<T> node, List<BSTNode> result)
+        private void PreOrderTraversal(BSTNode<T> node, List<NodeBase> result)
         {
             if (node == null)
             {
@@ -299,7 +299,7 @@ namespace AlgorithmsDataStructures2
             PreOrderTraversal(node.RightChild, result);
         }
 
-        private void PostOrderTraversal(BSTNode<T> node, List<BSTNode> result)
+        private void PostOrderTraversal(BSTNode<T> node, List<NodeBase> result)
         {
             if (node == null)
             {

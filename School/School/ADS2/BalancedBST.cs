@@ -3,36 +3,86 @@ using System.Collections.Generic;
 
 namespace AlgorithmsDataStructures2
 {
-    public static class BalancedBST
+    public class BSTNode
     {
-        public static int[] GenerateBBSTArray(int[] a)
+        public int NodeKey;
+        public BSTNode Parent;
+        public BSTNode LeftChild;
+        public BSTNode RightChild;
+        public int Level;
+
+        public BSTNode(int key, BSTNode parent)
         {
-            Array.Sort(a);
+            NodeKey = key;
+            Parent = parent;
+            LeftChild = null;
+            RightChild = null;
+        }
+    }
 
-            int height = (int)Math.Log(a.Length, 2);
+    public class BalancedBST
+    {
+        public BSTNode Root;
 
-            int[] bbstArray = new int[(int)Math.Pow(2, height + 1) - 1];
-
-            GenerateBBSTArray(a, 0, a.Length - 1, bbstArray, 0);
-
-            return bbstArray;
+        public BalancedBST()
+        {
+            Root = null;
         }
 
-        private static int GenerateBBSTArray(int[] sortedArray, int start, int end, int[] bbstArray, int currentIndex)
+        public void GenerateTree(int[] a)
+        {
+            Array.Sort(a);
+            Root = BuildBalancedBST(a, 0, a.Length - 1, null, 0);
+        }
+
+        public bool IsBalanced(BSTNode root_node)
+        {
+            if (root_node == null)
+            {
+                return true;
+            }
+
+            int leftHeight = CalculateHeight(root_node.LeftChild);
+            int rightHeight = CalculateHeight(root_node.RightChild);
+
+            if (Math.Abs(leftHeight - rightHeight) <= 1 && IsBalanced(root_node.LeftChild) && IsBalanced(root_node.RightChild))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private BSTNode BuildBalancedBST(int[] sortedArray, int start, int end, BSTNode parent, int level)
         {
             if (start > end)
             {
-                return currentIndex;
+                return null;
             }
 
             int mid = (start + end) / 2;
+            BSTNode newNode = new BSTNode(sortedArray[mid], parent)
+            {
+                Level = level
+            };
 
-            bbstArray[currentIndex] = sortedArray[mid];
+            newNode.LeftChild = BuildBalancedBST(sortedArray, start, mid - 1, newNode, level + 1);
+            newNode.RightChild = BuildBalancedBST(sortedArray, mid + 1, end, newNode, level + 1);
 
-            GenerateBBSTArray(sortedArray, start, mid - 1, bbstArray, 2 * currentIndex + 1);
-            GenerateBBSTArray(sortedArray, mid + 1, end, bbstArray, 2 * currentIndex + 2);
+            return newNode;
+        }
 
-            return currentIndex;
+        private int CalculateHeight(BSTNode node)
+        {
+            if (node == null)
+            {
+                return 0;
+            }
+
+            int leftHeight = CalculateHeight(node.LeftChild);
+            int rightHeight = CalculateHeight(node.RightChild);
+
+            return Math.Max(leftHeight, rightHeight) + 1;
         }
     }
 }
