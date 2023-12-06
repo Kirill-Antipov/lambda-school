@@ -193,5 +193,40 @@ namespace School.UnitTests.ADS2
 
             Assert.True(result == 4);
         }
+
+        [Fact]
+
+        public void EvenForest_Found()
+        {
+            var root = new SimpleTreeNode<int>(1, null);
+            var tree = new SimpleTree<int>(root);
+
+            var node2 = new SimpleTreeNode<int>(2, null);
+            var node3 = new SimpleTreeNode<int>(3, null);
+            var node6 = new SimpleTreeNode<int>(6, null);
+            var node8 = new SimpleTreeNode<int>(8, null);
+
+            tree.AddChild(tree.Root, node2);
+            tree.AddChild(tree.Root, node3);
+            tree.AddChild(tree.Root, node6);
+
+            tree.AddChild(node6, node8);
+
+            tree.AddChild(node8, new SimpleTreeNode<int>(9, null));
+            tree.AddChild(node8, new SimpleTreeNode<int>(10, null));
+
+            tree.AddChild(node3, new SimpleTreeNode<int>(4, null));
+
+            tree.AddChild(node2, new SimpleTreeNode<int>(5, null));
+            tree.AddChild(node2, new SimpleTreeNode<int>(7, null));
+
+            var result = tree.EvenTrees();
+
+            Assert.Equal(4, result.Count());
+            Assert.Equal(1, result.ElementAt(0));
+            Assert.Equal(3, result.ElementAt(1));
+            Assert.Equal(1, result.ElementAt(2));
+            Assert.Equal(6, result.ElementAt(3));
+        }
     }
 }

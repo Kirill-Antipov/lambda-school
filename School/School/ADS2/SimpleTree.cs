@@ -95,6 +95,13 @@ namespace AlgorithmsDataStructures2
             return leafCount;
         }
 
+        public List<T> EvenTrees()
+        {
+            List<T> nodesToRemove = new List<T>();
+            CountChildren(Root, nodesToRemove);
+            return nodesToRemove;
+        }
+
         private void GetAllNodesRecursive(SimpleTreeNode<T> node, List<SimpleTreeNode<T>> result)
         {
             if (node == null)
@@ -133,5 +140,30 @@ namespace AlgorithmsDataStructures2
             }
         }
 
+        private int CountChildren(SimpleTreeNode<T> node, List<T> nodesToRemove)
+        {
+            if (node == null)
+            {
+                return 0;
+            }
+
+            int childrenCount = 1;
+
+            if (node.Children != null)
+            {
+                foreach (var child in node.Children)
+                {
+                    childrenCount += CountChildren(child, nodesToRemove);
+                }
+            }
+
+            if (childrenCount % 2 == 0 && node.Parent != null)
+            {
+                nodesToRemove.Add(node.Parent.NodeValue);
+                nodesToRemove.Add(node.NodeValue);
+            }
+
+            return childrenCount;
+        }
     }
 }
