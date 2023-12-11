@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace AlgorithmsDataStructures2
 {
     public class Vertex
     {
         public int Value;
+        public bool Hit;
         public Vertex(int val)
         {
             Value = val;
@@ -18,6 +21,7 @@ namespace AlgorithmsDataStructures2
         public int[,] m_adjacency;
         public int max_vertex;
         public int current_vertex_count;
+
 
         public SimpleGraph(int size)
         {
@@ -92,6 +96,56 @@ namespace AlgorithmsDataStructures2
 
             m_adjacency[v1, v2] = 0;
             m_adjacency[v2, v1] = 0;
+        }
+
+        public List<Vertex> DepthFirstSearch(int VFrom, int VTo)
+        {
+            Stack<Vertex> result = new Stack<Vertex>();
+            DepthFirstSearch(VFrom, VTo, result);
+
+            var path = result.ToList();
+            path.Reverse();
+
+            return path;
+        }
+
+        private bool DepthFirstSearch(int currentVertex, int VTo, Stack<Vertex> result)
+        {
+            vertex[currentVertex].Hit = true;
+            result.Push(vertex[currentVertex]);
+
+            for (int i = 0; i < max_vertex; i++)
+            {
+                if (m_adjacency[currentVertex, i] == 1 && i == VTo)
+                {
+                    result.Push(vertex[VTo]);
+                    return true;
+                }
+            }
+
+            for (int i = 0; i < max_vertex; i++)
+            {
+                if (m_adjacency[currentVertex, i] != 1 || vertex[i].Hit)
+                {
+                    continue;
+                }
+
+                var finished = DepthFirstSearch(i, VTo, result);
+
+                if (finished)
+                {
+                    return true;
+                }
+            }
+
+            result.Pop();
+
+            if (result.Count == 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
