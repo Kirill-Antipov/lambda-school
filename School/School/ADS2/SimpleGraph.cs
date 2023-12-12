@@ -5,19 +5,20 @@ using System.Linq;
 
 namespace AlgorithmsDataStructures2
 {
-    public class Vertex
+    public class Vertex<T>
     {
-        public int Value;
         public bool Hit;
-        public Vertex(int val)
+        public T Value;
+        public Vertex(T val)
         {
             Value = val;
+            Hit = false;
         }
     }
 
-    public class SimpleGraph
+    public class SimpleGraph<T>
     {
-        public Vertex[] vertex;
+        public Vertex<T>[] vertex;
         public int[,] m_adjacency;
         public int max_vertex;
         public int current_vertex_count;
@@ -27,18 +28,18 @@ namespace AlgorithmsDataStructures2
         {
             max_vertex = size;
             m_adjacency = new int[size, size];
-            vertex = new Vertex[size];
+            vertex = new Vertex<T>[size];
             current_vertex_count = 0;
         }
 
-        public void AddVertex(int value)
+        public void AddVertex(T value)
         {
             if (current_vertex_count >= max_vertex)
             {
                 return;
             }
 
-            vertex[current_vertex_count] = new Vertex(value);
+            vertex[current_vertex_count] = new Vertex<T>(value);
             current_vertex_count++;
         }
 
@@ -98,9 +99,9 @@ namespace AlgorithmsDataStructures2
             m_adjacency[v2, v1] = 0;
         }
 
-        public List<Vertex> DepthFirstSearch(int VFrom, int VTo)
+        public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
         {
-            Stack<Vertex> result = new Stack<Vertex>();
+            Stack<Vertex<T>> result = new Stack<Vertex<T>>();
             DepthFirstSearch(VFrom, VTo, result);
 
             var path = result.ToList();
@@ -109,7 +110,7 @@ namespace AlgorithmsDataStructures2
             return path;
         }
 
-        private bool DepthFirstSearch(int currentVertex, int VTo, Stack<Vertex> result)
+        private bool DepthFirstSearch(int currentVertex, int VTo, Stack<Vertex<T>> result)
         {
             vertex[currentVertex].Hit = true;
             result.Push(vertex[currentVertex]);

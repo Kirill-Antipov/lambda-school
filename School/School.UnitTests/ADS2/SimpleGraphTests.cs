@@ -8,7 +8,7 @@ namespace School.UnitTests.ADS2
         [Fact]
         public void Vertex_Added()
         {
-            var graph = new SimpleGraph(10);
+            var graph = new SimpleGraph<int>(10);
 
             graph.AddVertex(1);
 
@@ -19,7 +19,7 @@ namespace School.UnitTests.ADS2
         [Fact]
         public void Can_Maintain_Edges()
         {
-            var graph = new SimpleGraph(10);
+            var graph = new SimpleGraph<int>(10);
 
             graph.AddVertex(1);
             graph.AddVertex(2);
@@ -44,7 +44,7 @@ namespace School.UnitTests.ADS2
         [Fact]
         public void Vertex_Deleted()
         {
-            var graph = new SimpleGraph(10);
+            var graph = new SimpleGraph<int>(10);
 
             graph.AddVertex(1);
             graph.AddVertex(2);
@@ -64,7 +64,7 @@ namespace School.UnitTests.ADS2
         [Fact]
         public void DepthFirstSearch_Path_Found()
         {
-            var graph = new SimpleGraph(10);
+            var graph = new SimpleGraph<int>(10);
 
             graph.AddVertex(0);
             graph.AddVertex(1);
@@ -88,7 +88,7 @@ namespace School.UnitTests.ADS2
         [Fact]
         public void DepthFirstSearch_No_Results_When_No_Path()
         {
-            var graph = new SimpleGraph(10);
+            var graph = new SimpleGraph<int>(10);
 
             graph.AddVertex(0);
             graph.AddVertex(1);
@@ -105,7 +105,7 @@ namespace School.UnitTests.ADS2
 
             var result = graph.DepthFirstSearch(0, 1);
 
-            Assert.Equal(0, result.Count);
+            Assert.Empty(result);
         }
     }
 }
