@@ -107,5 +107,29 @@ namespace School.UnitTests.ADS2
 
             Assert.Empty(result);
         }
+
+        [Fact]
+        public void BreadthFirstSearch_Path_Found()
+        {
+            var graph = new SimpleGraph<int>(10);
+
+            graph.AddVertex(0);
+            graph.AddVertex(1);
+            graph.AddVertex(2);
+            graph.AddVertex(3);
+            graph.AddVertex(4);
+            graph.AddVertex(5);
+            graph.AddVertex(6);
+
+            graph.AddEdge(0, 2);
+            graph.AddEdge(2, 3);
+            graph.AddEdge(3, 4);
+            graph.AddEdge(3, 4);
+            graph.AddEdge(4, 1);
+
+            var result = graph.BreadthFirstSearch(0, 1);
+
+            Assert.Equal(5, result.Count);
+        }
     }
 }

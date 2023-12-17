@@ -110,6 +110,53 @@ namespace AlgorithmsDataStructures2
             return path;
         }
 
+        public List<Vertex<T>> BreadthFirstSearch(int VFrom, int VTo)
+        {
+            for (int i = 0; i < current_vertex_count; i++)
+            {
+                vertex[i].Hit = false;
+            }
+
+            List<Vertex<T>> result = new List<Vertex<T>>();
+            Queue<int> queue = new Queue<int>();
+
+            queue.Enqueue(VFrom);
+            BreadthFirstSearch(VTo, queue, result);
+
+            return result;
+        }
+
+        private void BreadthFirstSearch(int VTo, Queue<int> queue, List<Vertex<T>> result)
+        {
+            if (queue.Count == 0)
+            {
+                return;
+            }
+
+            int currentVertexIndex = queue.Dequeue();
+            Vertex<T> currentVertex = vertex[currentVertexIndex];
+            currentVertex.Hit = true;
+
+            if (currentVertexIndex == VTo)
+            {
+                result.Add(currentVertex);
+                return;
+            }
+
+            result.Add(currentVertex);
+
+            for (int i = 0; i < current_vertex_count; i++)
+            {
+                if (m_adjacency[currentVertexIndex, i] == 1 && !vertex[i].Hit)
+                {
+                    queue.Enqueue(i);
+                    vertex[i].Hit = true;
+                }
+            }
+
+            BreadthFirstSearch(VTo, queue, result);
+        }
+
         private bool DepthFirstSearch(int currentVertex, int VTo, Stack<Vertex<T>> result)
         {
             vertex[currentVertex].Hit = true;
