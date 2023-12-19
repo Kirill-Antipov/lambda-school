@@ -123,7 +123,7 @@ namespace AlgorithmsDataStructures2
             queue.Enqueue(VFrom);
             BreadthFirstSearch(VTo, queue, result);
 
-            return result;
+            return vertex[VTo].Hit ? result : new List<Vertex<T>>();
         }
 
         private void BreadthFirstSearch(int VTo, Queue<int> queue, List<Vertex<T>> result)
