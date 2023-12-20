@@ -117,16 +117,16 @@ namespace AlgorithmsDataStructures2
                 vertex[i].Hit = false;
             }
 
-            List<Vertex<T>> result = new List<Vertex<T>>();
+            int[] path = new int[max_vertex];
             Queue<int> queue = new Queue<int>();
 
             queue.Enqueue(VFrom);
-            BreadthFirstSearch(VTo, queue, result);
+            BreadthFirstSearch(VTo, queue, path);
 
-            return vertex[VTo].Hit ? result : new List<Vertex<T>>();
+            return vertex[VTo].Hit ? GetPath(VTo, VFrom, path, new List<Vertex<T>>()) : new List<Vertex<T>>();
         }
 
-        private void BreadthFirstSearch(int VTo, Queue<int> queue, List<Vertex<T>> result)
+        private void BreadthFirstSearch(int VTo, Queue<int> queue, int[] path)
         {
             if (queue.Count == 0)
             {
@@ -139,11 +139,8 @@ namespace AlgorithmsDataStructures2
 
             if (currentVertexIndex == VTo)
             {
-                result.Add(currentVertex);
                 return;
             }
-
-            result.Add(currentVertex);
 
             for (int i = 0; i < current_vertex_count; i++)
             {
@@ -151,10 +148,27 @@ namespace AlgorithmsDataStructures2
                 {
                     queue.Enqueue(i);
                     vertex[i].Hit = true;
+                    path[i] = currentVertexIndex;
                 }
             }
 
-            BreadthFirstSearch(VTo, queue, result);
+            BreadthFirstSearch(VTo, queue, path);
+        }
+
+        private List<Vertex<T>> GetPath(int vFrom, int vTo, int[] path, List<Vertex<T>> result)
+        {
+            if (vFrom == vTo)
+            {
+                result.Add(vertex[vTo]);
+
+                result.Reverse();
+
+                return result;
+            }
+
+            result.Add(vertex[vFrom]);
+
+            return GetPath(path[vFrom], vTo, path, result);
         }
 
         private bool DepthFirstSearch(int currentVertex, int VTo, Stack<Vertex<T>> result)
