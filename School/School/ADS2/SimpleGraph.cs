@@ -126,6 +126,11 @@ namespace AlgorithmsDataStructures2
             return vertex[VTo].Hit ? GetPath(VTo, VFrom, path, new List<Vertex<T>>()) : new List<Vertex<T>>();
         }
 
+        public List<Vertex<T>> WeakVertices()
+        {
+            return new List<Vertex<T>>();
+        }
+
         private void BreadthFirstSearch(int VTo, Queue<int> queue, int[] path)
         {
             if (queue.Count == 0)
