@@ -128,7 +128,18 @@ namespace AlgorithmsDataStructures2
 
         public List<Vertex<T>> WeakVertices()
         {
-            return new List<Vertex<T>>();
+            var result = new List<Vertex<T>>();
+            var adjacencyPowThree = PowThree(m_adjacency, current_vertex_count);
+
+            for (int i = 0; i < current_vertex_count; i++)
+            {
+                if (adjacencyPowThree[i, i] == 0)
+                {
+                    result.Add(vertex[i]);
+                }
+            }
+
+            return result;
         }
 
         private void BreadthFirstSearch(int VTo, Queue<int> queue, int[] path)
@@ -213,6 +224,33 @@ namespace AlgorithmsDataStructures2
             }
 
             return false;
+        }
+
+        private int[,] PowThree(int[,] matrix, int size)
+        {
+            var matrixPowTwo = Multiply(matrix, matrix, size);
+            var marixPowThree = Multiply(matrix, matrixPowTwo, size);
+
+            return marixPowThree;
+        }
+
+        private int[,] Multiply(int[,] matrixA, int[,] matrixB, int size)
+        {
+            int[,] result = new int[size, size];
+
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    result[i, j] = 0;
+                    for (int k = 0; k < size; k++)
+                    {
+                        result[i, j] += matrixA[i, k] * matrixB[k, j];
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }
