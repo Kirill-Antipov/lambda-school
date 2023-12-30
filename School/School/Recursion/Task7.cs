@@ -16,18 +16,19 @@ namespace School.Recursion
                 return result;
             }
 
+            int currentMax = input[current] >= max ? input[current] : max;
+            int currentResult = result;
+
             if (input[current] >= max)
             {
-                return GetSecondMaxElement(input, current + 1, input[current], max);
+                currentResult = max;
             }
             else if (input[current] >= result)
             {
-                return GetSecondMaxElement(input, current + 1, max, input[current]);
+                currentResult = input[current];
             }
-            else 
-            {
-                return GetSecondMaxElement(input, current + 1, max, result);
-            }
+
+            return GetSecondMaxElement(input, current + 1, currentMax, currentResult);
         }
     }
 }
